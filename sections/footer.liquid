@@ -143,10 +143,9 @@
       {%- for block in section.blocks -%}
 
         <div class="site-footer__item
-                    {% if section.blocks.size == 1 %} site-footer__item--center{% endif %}
-                    {{ footer_item }}
-                    {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half{% endif %}"
-             {{ block.shopify_attributes }}>
+                                                            {% if section.blocks.size == 1 %} site-footer__item--center{% endif %}
+                                                            {{ footer_item }}
+                                                            {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half{% endif %}" {{ block.shopify_attributes }}>
           <div class="site-footer__item-inner site-footer__item-inner--{{ block.type }}">
 
             {%- if block.settings.title -%}
@@ -156,43 +155,30 @@
             {%- case block.type -%}
               {%- when 'newsletter' -%}
                 <div class="site-footer__newsletter
-                          {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
+                                                                                                          {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
                   {%- assign formId = 'ContactFooter' -%}
                   {% form 'customer', id: formId, novalidate: 'novalidate' %}
                     {%- if form.posted_successfully? -%}
-                      <p class="form-message form-message--success" tabindex="-1" data-form-status>
+                      <p class="form-message form-message--success" data-form-status tabindex="-1">
                         {{ 'general.newsletter_form.confirmation' | t }}
                       </p>
                     {%- endif -%}
-                    <input type="hidden" name="contact[tags]" value="newsletter">
+                    <input name="contact[tags]" type="hidden" value="newsletter">
                     <div class="input-group {% if form.errors %} input-group--error{% endif %}">
-                      <input type="email"
-                        name="contact[email]"
-                        id="{{ formId }}-email"
-                        class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %}"
-                        value="{{ form.email }}"
-                        placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
-                        aria-label="{{ 'general.newsletter_form.email_placeholder' | t }}"
-                        aria-required="true"
-                        required
-                        autocorrect="off"
-                        autocapitalize="off"
-                        {% if form.errors %}
-                          aria-invalid="true"
-                          aria-describedby="{{ formId }}-email-error"
-                          data-form-status
-                        {% endif %}>
+                      <input type="email" name="contact[email]" id="{{ formId }}-email" class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %}" value="{{ form.email }}" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" aria-label="{{ 'general.newsletter_form.email_placeholder' | t }}" aria-required="true" required autocorrect="off" autocapitalize="off" {% if form.errors %} aria-invalid="true" aria-describedby="{{ formId }}-email-error" data-form-status {% endif %}>
                       <span class="input-group__btn">
-                        <button type="submit" class="btn newsletter__submit" name="commit" >
+                        <button class="btn newsletter__submit" name="commit" type="submit">
                           <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
                         </button>
                       </span>
                     </div>
                     {% if form.errors contains 'email' %}
                       <span id="{{ formId }}-email-error" class="input-error-message">
-                        <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+                        <span class="visually-hidden">{{ 'general.accessibility.error' | t }}
+                        </span>
                         {% include 'icon-error' %}
-                        <span class="site-footer__newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+                        <span class="site-footer__newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }}
+                          {{ form.errors.messages['email'] }}.</span>
                       </span>
                     {% endif %}
                   {% endform %}
@@ -201,25 +187,23 @@
               {%- when 'text' -%}
                 {%- if block.settings.text != blank -%}
                   <div class="site-footer__rte
-                              {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
-                      {{ block.settings.text }}
+                                                                                                                      {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
+                    {{ block.settings.text }}
                   </div>
                 {%- endif -%}
 
               {%- when 'link_list' -%}
                 {%- assign footer_linklist = block.settings.menu -%}
-                  <ul class="site-footer__linklist
-                            {% if inline_list %}list--inline{% endif %}">
-                    {%- for link in linklists[footer_linklist].links -%}
-                      <li class="site-footer__linklist-item">
-                        <a href="{{ link.url }}"
-                          {% if link.current %} aria-current="page"{% endif %}
-                        >
-                          {{ link.title | escape }}
-                        </a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
+                <ul class="site-footer__linklist
+                                                                                                            {% if inline_list %}list--inline{% endif %}">
+                  {%- for link in linklists[footer_linklist].links -%}
+                    <li class="site-footer__linklist-item">
+                      <a href="{{ link.url }}" {% if link.current %} aria-current="page" {% endif %}>
+                        {{ link.title | escape }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
 
             {%- endcase -%}
 
@@ -245,13 +229,13 @@
                 </h2>
 
                 <div class="disclosure" data-disclosure-locale>
-                  <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="lang-list" aria-describedby="lang-heading" data-disclosure-toggle>
+                  <button aria-controls="lang-list" aria-describedby="lang-heading" aria-expanded="false" class="disclosure__toggle" data-disclosure-toggle type="button">
                     {{ form.current_locale.endonym_name }}
                   </button>
-                  <ul id="lang-list" class="disclosure-list" data-disclosure-list>
+                  <ul class="disclosure-list" data-disclosure-list id="lang-list">
                     {% for locale in form.available_locales %}
                       <li class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}">
-                        <a class="disclosure-list__option" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
+                        <a class="disclosure-list__option" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %} aria-current="true" {% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
                           {{ locale.endonym_name }}
                         </a>
                       </li>
@@ -269,14 +253,20 @@
                 </h2>
 
                 <div class="disclosure" data-disclosure-currency>
-                  <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list" aria-describedby="currency-heading" data-disclosure-toggle>
-                    {{ form.current_currency.iso_code }} {%- if form.current_currency.symbol -%}{{ form.current_currency.symbol }}{%- endif -%}
+                  <button aria-controls="currency-list" aria-describedby="currency-heading" aria-expanded="false" class="disclosure__toggle" data-disclosure-toggle type="button">
+                    {{ form.current_currency.iso_code }}
+                    {%- if form.current_currency.symbol -%}
+                      {{ form.current_currency.symbol }}
+                    {%- endif -%}
                   </button>
-                  <ul id="currency-list" class="disclosure-list" data-disclosure-list>
+                  <ul class="disclosure-list" data-disclosure-list id="currency-list">
                     {% for currency in form.available_currencies %}
                       <li class="disclosure-list__item {% if currency.iso_code == form.current_currency.iso_code %}disclosure-list__item--current{% endif %}">
-                        <a class="disclosure-list__option" href="#" {% if currency.iso_code == form.current_currency.iso_code %}aria-current="true"{% endif %} data-value="{{ currency.iso_code }}" data-disclosure-option>
-                          {{ currency.iso_code }} {%- if currency.symbol -%}{{ currency.symbol }}{%- endif -%}
+                        <a class="disclosure-list__option" href="#" {% if currency.iso_code == form.current_currency.iso_code %} aria-current="true" {% endif %} data-value="{{ currency.iso_code }}" data-disclosure-option>
+                          {{ currency.iso_code }}
+                          {%- if currency.symbol -%}
+                            {{ currency.symbol }}
+                          {%- endif -%}
                         </a>
                       </li>
                     {%- endfor -%}
@@ -318,7 +308,9 @@
           </ul>
         {%- else -%}
           <div class="small--hide site-footer-item-align-right {% if show_selectors or show_payment_icons %}site-footer-item-center-vertically{% endif %}">
-            <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
+            <small class="site-footer__copyright-content">&copy;
+              {{ 'now' | date: "%Y" }},
+              {{ shop.name | link_to: routes.root_url }}</small>
             <small class="site-footer__copyright-content site-footer__copyright-content-powered-by">{{ powered_by_link }}</small>
           </div>
         {%- endif -%}
@@ -332,13 +324,17 @@
 
       {%- if social_icons and show_selectors -%}
         <div class="grid__item small--hide site-footer-item-align-right {% if show_payment_icons %}one-half{% endif %}">
-          <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
+          <small class="site-footer__copyright-content">&copy;
+            {{ 'now' | date: "%Y" }},
+            {{ shop.name | link_to: routes.root_url }}</small>
           <small class="site-footer__copyright-content site-footer__copyright-content--powered-by">{{ powered_by_link }}</small>
         </div>
       {%- endif -%}
 
       <div class="grid__item small--one-whole {{ copyright_show_class }} site-footer-item-align-right">
-        <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
+        <small class="site-footer__copyright-content">&copy;
+          {{ 'now' | date: "%Y" }},
+          {{ shop.name | link_to: routes.root_url }}</small>
         <small class="site-footer__copyright-content site-footer__copyright-content--powered-by">{{ powered_by_link }}</small>
       </div>
     </div>
@@ -346,8 +342,8 @@
 </footer>
 
 
-
 {% schema %}
+
 {
   "name": {
     "da": "Sidefod",
@@ -393,8 +389,7 @@
         "zh-CN": "支付方式",
         "zh-TW": "付款方式"
       }
-    },
-    {
+    }, {
       "type": "checkbox",
       "id": "show_payment_icons",
       "label": {
@@ -418,8 +413,7 @@
         "zh-TW": "顯示付款圖示"
       },
       "default": false
-    },
-    {
+    }, {
       "type": "header",
       "content": {
         "da": "Farve",
@@ -441,8 +435,7 @@
         "zh-CN": "颜色",
         "zh-TW": "顏色"
       }
-    },
-    {
+    }, {
       "type": "color",
       "id": "color_footer_bg",
       "label": {
@@ -466,8 +459,7 @@
         "zh-TW": "背景"
       },
       "default": "#f6f6f6"
-    },
-    {
+    }, {
       "type": "color",
       "id": "color_footer_text",
       "label": {
@@ -491,8 +483,7 @@
         "zh-TW": "文字"
       },
       "default": "#333232"
-    },
-    {
+    }, {
       "type": "header",
       "content": {
         "da": "Sprogvælger",
@@ -534,8 +525,7 @@
         "zh-CN": "若要添加语言，请转到您的 [语言设置。](/admin/settings/languages)",
         "zh-TW": "若要新增語言，請前往 [語言設定。](/admin/settings/languages)"
       }
-    },
-    {
+    }, {
       "type": "checkbox",
       "id": "show_locale_selector",
       "label": {
@@ -559,8 +549,7 @@
         "zh-TW": "顯示語言選擇器"
       },
       "default": true
-    },
-    {
+    }, {
       "type": "header",
       "content": {
         "da": "Valutavælger",
@@ -602,8 +591,7 @@
         "zh-CN": "若要添加货币，请转到 [支付设置。](/admin/settings/payments)",
         "zh-TW": "若要新增幣別，請前往 [付款設定。](/admin/settings/payments)"
       }
-    },
-    {
+    }, {
       "type": "checkbox",
       "id": "show_currency_selector",
       "label": {
@@ -696,8 +684,7 @@
             "zh-CN": "快速链接",
             "zh-TW": "快速連結"
           }
-        },
-        {
+        }, {
           "type": "link_list",
           "id": "menu",
           "label": {
@@ -723,8 +710,7 @@
           "default": "footer"
         }
       ]
-    },
-    {
+    }, {
       "type": "text",
       "name": {
         "da": "Tekst",
@@ -790,8 +776,7 @@
             "zh-CN": "介绍您的业务",
             "zh-TW": "描述您的商家"
           }
-        },
-        {
+        }, {
           "type": "richtext",
           "id": "text",
           "label": {
@@ -836,8 +821,7 @@
           }
         }
       ]
-    },
-    {
+    }, {
       "type": "newsletter",
       "limit": 1,
       "name": {
@@ -929,4 +913,5 @@
     }
   ]
 }
+
 {% endschema %}
