@@ -1,0 +1,194 @@
+  <!-- promotion area start -->
+  <section class="promotion_area">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="promotion_area_left " style=" background: url({% if section.settings.sale_offer_1_image%}{{ section.settings.sale_offer_1_image | img_url: 'master' | prepend: 'https:' }}{% endif%});">
+            <div class="promotion_left_content">
+              <h2>{{section.settings.sale_offer_1_title}}</h2>
+              <p>{{section.settings.sale_offer_1_desc}}</p>
+              <a href="{{section.settings.sale_offer_1_btn_link}}" class="promotion_shop_bnt">{{section.settings.sale_offer_1_btn_text}}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="promotion_area_right margin-b" style=" background: url({% if section.settings.sale_offer_2_image%}{{ section.settings.sale_offer_2_image | img_url: 'master' | prepend: 'https:' }}{% endif%});">
+                <div class="promotion_right_content">
+                  <h2>{{section.settings.sale_offer_2_title}}</h2>
+                  <p>{{section.settings.sale_offer_2_desc}}</p>
+                  <a href="{{section.settings.sale_offer_2_btn_link}}" class="promotion_shop_bnt">{{section.settings.sale_offer_2_btn_text}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="promotion_area_right margin-t" style=" background: url({% if section.settings.sale_offer_3_image%}{{ section.settings.sale_offer_3_image | img_url: 'master' | prepend: 'https:' }}{% endif%});">
+                <div class="promotion_right_content">
+                  <h2>{{section.settings.sale_offer_3_title}}</h2>
+                  <p>{{section.settings.sale_offer_3_desc}}</p>
+                  <a href="{{section.settings.sale_offer_3_btn_link}}" class="promotion_shop_bnt">{{section.settings.sale_offer_3_btn_text}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- promotion area end -->
+
+
+  {% schema %}
+{
+  "name": {
+    "en": "Sale Offer"
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "sale_offer_1_title",
+      "label": {
+        "en": "Sale offer-1 title"
+      },
+      "default": {
+        "en": "Phones Sale"
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "sale_offer_1_desc",
+      "label": {
+        "en": "Sale offer-1 Description"
+      },
+      "default": {
+        "en": "Up to <span>30%</span> sale for all phones!"
+      }
+    },
+    {
+      "type": "text",
+      "id": "sale_offer_1_btn_text",
+      "label": {
+        "en": "Sale offer-1 button text"
+      },
+      "default": {
+        "en": "Shop Now"
+      }
+    },
+    {
+      "type": "url",
+      "id": "sale_offer_1_btn_link",
+      "label": {
+        "en": "Sale offer-1 button link"
+      }
+    }, 
+     {
+      "type": "image_picker",
+      "id": "sale_offer_1_image",
+      "label": {
+        "en": "Sale offer-1 image"
+      }
+    },
+    {
+      "type": "text",
+      "id": "sale_offer_2_title",
+      "label": {
+        "en": "Sale offer-2 title"
+      },
+      "default": {
+        "en": "Electronics Sale"
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "sale_offer_2_desc",
+      "label": {
+        "en": "Sale offer-2 Description"
+      },
+      "default": {
+        "en": "Up to <span>70%</span> sale for electronics!"
+      }
+    },
+    {
+      "type": "text",
+      "id": "sale_offer_2_btn_text",
+      "label": {
+        "en": "Sale offer-2 button text"
+      },
+      "default": {
+        "en": "Shop Now"
+      }
+    },
+    {
+      "type": "url",
+      "id": "sale_offer_2_btn_link",
+      "label": {
+        "en": "Sale offer-2 button link"
+      }
+    }, 
+     {
+      "type": "image_picker",
+      "id": "sale_offer_2_image",
+      "label": {
+        "en": "Sale offer-2 image"
+      }
+    },
+    {
+      "type": "text",
+      "id": "sale_offer_3_title",
+      "label": {
+        "en": "Sale offer-3 title"
+      },
+      "default": {
+        "en": "Furniture Offer"
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "sale_offer_3_desc",
+      "label": {
+        "en": "Sale offer-3 Description"
+      },
+      "default": {
+        "en": "Up to <span>50%</span> sale for all furniture items!"
+      }
+    },
+    {
+      "type": "text",
+      "id": "sale_offer_3_btn_text",
+      "label": {
+        "en": "Sale offer-3 button text"
+      },
+      "default": {
+        "en": "Shop Now"
+      }
+    },
+    {
+      "type": "url",
+      "id": "sale_offer_3_btn_link",
+      "label": {
+        "en": "Sale offer-3 button link"
+      }
+    }, 
+     {
+      "type": "image_picker",
+      "id": "sale_offer_3_image",
+      "label": {
+        "en": "Sale offer-3 image"
+      }
+    }
+
+
+
+  ],
+  "presets": [{
+    "name": "Sale Offer",
+    "category": "Sale Offer"
+  }]
+}
+{% endschema %}

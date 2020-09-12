@@ -1,0 +1,73 @@
+<section class="shipping_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="warenty_years">
+          {% if section.settings.warranty_years != blank%}
+            <p>{{section.settings.warranty_years}}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="shipping_cost">
+          {% if section.settings.shipping_text != blank %}
+           <p><i class="fas fa-truck"></i> {{section.settings.shipping_text}}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="return_policy">
+          {% if section.settings.return_policy != blank%}
+            <p><i class="fas fa-undo-alt"></i> {{section.settings.return_policy}}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": {
+    "en": "Shipping Policy"
+  },
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "warranty_years",
+      "label": {
+        "en": "Warranty Years"
+      },
+      "default": {
+        "en": "<span>2</span> Years Warranty"
+      }
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": {
+        "en": "Shipping Method"
+      },
+      "default": {
+        "en": "Free Shipping"
+      }
+    },
+    {
+      "type": "text",
+      "id": "return_policy",
+      "label": {
+        "en": "Return Policy"
+      },
+      "default": {
+        "en": "Return Policy in 30 days"
+      }
+    }
+  ],
+  "presets": [{
+    "name": "Shipping Policy",
+    "category": "Shipping"
+  }]
+}
+{% endschema %}

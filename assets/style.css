@@ -201,6 +201,9 @@ nav.sidebar ul li a span.rotate{
 }
 
 /*=========== Slider section ==========*/
+#shopify-section-1599460543855{
+  padding-bottom: 0px;
+}
 .homepage_slider_area img{
   width: 100%;
 }
@@ -622,3 +625,5 @@ footer.footer_section {
 .footer_bottom {
   margin-top: 15px;
 }
+
+
